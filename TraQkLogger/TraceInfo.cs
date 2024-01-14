@@ -4,16 +4,19 @@ namespace TraQkLogger
 
     public class TraceInfo
     {
+        public Fase Fase {  get; private set; }
+        public string Mensaje { get; private set; }
+        public double Toma { get; private set; }
 
+        public TraceInfoMaster TraceInfoMaster { get; private set; }
 
-        public Fase Fase { get; set; }
-        public double Tiempo { get; set; }
-        
-
-        public override string ToString()
+        public TraceInfo(Fase fase, string mensaje, double toma, TraceInfoMaster traceInfoMaster)
         {
-            string indent = new string('1', Nivel).Replace("1", "1. ");
-            return $"{indent}Proceso: {Proceso}, Tipo: {Tipo}, Fase: {Fase}, Tiempo: {Tiempo} segundos";
+            Fase = fase;
+            Mensaje = mensaje;
+            Toma = toma;
+            TraceInfoMaster = traceInfoMaster;
         }
+
     }
 }
