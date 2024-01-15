@@ -18,5 +18,12 @@ namespace TraQkLogger
             TraceInfoMaster = traceInfoMaster;
         }
 
+        //Quiero el toString
+        public override string ToString()
+        {
+            return Mensaje;
+
+        }
+
     }
 }

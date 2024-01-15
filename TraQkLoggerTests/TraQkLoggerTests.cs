@@ -25,24 +25,25 @@ namespace TraQkLogger.Tests
             logger.Iniciar("procesoPS", Tipo.PS, "mensaje");
                 logger.AddTrace("procesoBDD", Tipo.BD, Fase.Ini, "mensaje BDD Ini");
                 Task.Delay(1000).Wait();
-                logger.AddTrace("procesoBDD", Tipo.BD, Fase.Info, "4 recuperados");
+                logger.AddTrace("procesoBDD", Tipo.BD, Fase.Dbg, "Task.Delay(1000)");
                 Task.Delay(1000).Wait();
-                    logger.AddTrace("procesoWS", Tipo.WS, Fase.Ini, "4 llamadas");
-                    logger.AddTrace("procesoWS", Tipo.WS, Fase.Fin, "4 llamadas");
+                    logger.AddTrace("procesoWS", Tipo.WS, Fase.Ini, "Task.Delay(0)");
+                    Task.Delay(250).Wait();
+                    logger.AddTrace("procesoWS", Tipo.WS, Fase.Fin, "Task.Delay(0)");
                     Task.Delay(500).Wait();
-                logger.AddTrace("procesoBDD", Tipo.BD, Fase.Fin, "mensaje BDD Fin");
+                logger.AddTrace("procesoBDD", Tipo.BD, Fase.Fin, "Task.Delay(1500)");
             logger.Finalizar("procesoPS", Tipo.PS, "mensaje");
 
             List<TraceInfo> traces = logger.Traces.ToList();
 
             var trace = traces.First();
-            Assert.AreEqual("proceso", trace.TraceInfoMaster.Proceso);
+            Assert.AreEqual("procesoPS", trace.TraceInfoMaster.Proceso);
             Assert.AreEqual(Tipo.PS, trace.TraceInfoMaster.Tipo);
             Assert.AreEqual(Fase.Ini, trace.Fase);
             Assert.AreEqual(1, trace.TraceInfoMaster.Nivel);
 
             trace = traces.Last();
-            Assert.AreEqual("proceso", trace.TraceInfoMaster.Proceso);
+            Assert.AreEqual("procesoPS", trace.TraceInfoMaster.Proceso);
             Assert.AreEqual(Tipo.PS, trace.TraceInfoMaster.Tipo);
             Assert.AreEqual(Fase.Fin, trace.Fase);
             Assert.AreEqual(1, trace.TraceInfoMaster.Nivel);

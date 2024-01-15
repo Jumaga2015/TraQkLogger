@@ -7,6 +7,6 @@ namespace TraQkLogger
     {
         Ini,
         Fin,
-        Info
+        Dbg
     }
 }
